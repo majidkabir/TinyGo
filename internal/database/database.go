@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"log"
 	"time"
+
+	// _ "github.com/lib/pq" // PostgreSQL driver
+	_ "github.com/jackc/pgx/v5/stdlib" // PostgreSQL driver
 )
 
 // Config holds the database configuration parameters.
@@ -31,7 +34,7 @@ func New(cfg Config) (*Database, error) {
 	)
 
 	// Open a new database connection
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to database: %w", err)
 	}
